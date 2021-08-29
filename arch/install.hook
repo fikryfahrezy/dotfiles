@@ -1,1 +1,10 @@
-/etc/pacman.d/hooks/install.hook
+# https://wiki.archlinux.org/title/Pacman/Tips_and_tricks#Reinstalling_all_packages
+[Trigger]
+Operation = Install
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+When = PostTransaction
+Exec = /bin/sh -c '/usr/bin/pacman -Qqe > ~/dotfiles/arch/pkglist.txt && /usr/bin/pacman -Qqem > ~/dotfiles/arch/foreignpkglist.txt'

@@ -9,7 +9,7 @@ echo "Running $FN in $FWD from $PWD"
 # https://unix.stackexchange.com/a/210656
 if [ "$(grep -Ei 'arch|manjaro' /etc/*release)" ]; then
   echo "Hi Arch Based user"
-  $FWD/arch/install.sh
+  $FWD/arch/install.sh "$PWD/$FWD"
 elif [ "$(grep -Ei 'debian|buntu|mint' /etc/*release)" ]; then
   echo  "Hi Debian Base user"
 fi
