@@ -1,0 +1,1 @@
+/home/zul/.config/nvim/init.vim

@@ -1,0 +1,13 @@
+android-studio
+brave-bin
+datagrip
+datagrip-jre
+droidcam
+google-chrome
+mongodb-bin
+mongodb-tools-bin
+postman-bin
+ttf-wps-fonts
+v4l2loopback-dc-dkms
+visual-studio-code-bin
+wps-office
