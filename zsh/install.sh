@@ -7,8 +7,6 @@ CWD="$(pwd)/$FWD/"
 
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-rm $HOME/.zshrc
-
-ls -s $CWD/.zshrc $HOME/.zshrc
+$CWD/ldf.sh $CWD/.zshrc $HOME/.zshrc
 
 echo "Done running zsh/install.sh"

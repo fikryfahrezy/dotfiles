@@ -1,0 +1,1 @@
+/home/zul/dotfiles/scripts/ldf.sh
