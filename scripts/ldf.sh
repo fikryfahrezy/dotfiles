@@ -12,7 +12,6 @@ then
     # Existing symlink 
     echo "Removing existing symlink: ${dest}"
     rm ${dest} 
-
   elif [ -f "${dest}" ]; then
     # Existing file
     echo "Backing up existing file: ${dest}"

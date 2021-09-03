@@ -14,7 +14,7 @@ ln $FWD/scripts/ldf.sh $FWD/zsh/ldf.sh
 # https://unix.stackexchange.com/a/210656
 if [ "$(grep -Ei 'arch|manjaro' /etc/*release)" ]; then
   echo "Hi Arch Based user"
-  $FWD/arch/install.sh "$PWD/$FWD"
+  $FWD/arch/install.sh
 elif [ "$(grep -Ei 'debian|buntu|mint' /etc/*release)" ]; then
   echo  "Hi Debian Base user"
 else 
