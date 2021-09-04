@@ -3,13 +3,13 @@
 FWD=`dirname "$0"`
 FN=`basename "$0"`
 PWD=`pwd`
+CWD="$PWD/$FWD/"
 
 echo "Running $FN in $FWD from $PWD"
 
-ln $FWD/scripts/ldf.sh $FWD/arch/ldf.sh 
-ln $FWD/scripts/ldf.sh $FWD/bash/ldf.sh
-ln $FWD/scripts/ldf.sh $FWD/nvim/ldf.sh
-ln $FWD/scripts/ldf.sh $FWD/zsh/ldf.sh
+$CWD/scripts/ldf.sh $CWD/scripts/ldf.sh $CWD/arch/ldf.sh 
+$CWD/scripts/ldf.sh $CWD/scripts/ldf.sh $CWD/nvim/ldf.sh
+$CWD/scripts/ldf.sh $CWD/scripts/ldf.sh $CWD/zsh/ldf.sh
 
 # https://unix.stackexchange.com/a/210656
 if [ "$(grep -Ei 'arch|manjaro' /etc/*release)" ]; then
