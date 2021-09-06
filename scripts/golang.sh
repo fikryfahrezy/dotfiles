@@ -2,13 +2,31 @@
 
 echo "Running scripts/golang.sh"
 
-GO_VER="1.16"
+FWD=`dirname "$0"`
+CWD="$(pwd)/$FWD/"
+GO_VER="1.17"
+GO_PATH=/usr/local/go
+PREV_VER=""
 
-sudo rm -rf /usr/local/go
-sudo tar -C /usr/local -xzf go1.16.linux-amd64.tar.gz
+if [ -d "$GO_PATH" ]; then
+  # Existing dir
+  PREV_VER="$GO_PATH"
+fi
 
-export PATH=$PATH:/usr/local/go/bin
+wget -P "$CWD" -c https://golang.org/dl/go$GO_VER.linux-amd64.tar.gz
+
+sudo rm -rf $GO_PATH
+sudo tar -C /usr/local -xzf $CWD/go$GO_VER.linux-amd64.tar.gz
+
+if [ -z $PREV_VER ]; then 
+  echo "Fresh Install"
+  export PATH=$PATH:$GO_PATH/bin
+else
+  echo "Updating GO"
+fi
 
 go version
+
+rm -rf $CWD/go$GO_VER.linux-amd64.tar.gz
 
 echo "Done running scripts/golang.sh"
