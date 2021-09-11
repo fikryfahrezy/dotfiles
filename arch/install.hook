@@ -7,4 +7,4 @@ Target = *
 
 [Action]
 When = PostTransaction
-Exec = /bin/sh -c '/usr/bin/pacman -Qqe > ~/dotfiles/arch/pkglist.txt && /usr/bin/pacman -Qqem > ~/dotfiles/arch/foreignpkglist.txt'
+Exec = /bin/sh -c '/usr/bin/pacman -Qqe > /etc/pacman.d/hooks/pkglist.txt && /usr/bin/pacman -Qqem > /etc/pacman.d/hooks/foreignpkglist.txt'

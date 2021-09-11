@@ -221,6 +221,7 @@ ripgrep
 rsync
 s-nail
 samba
+scrcpy
 screenfetch
 sed
 shadow
