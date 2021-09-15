@@ -3,32 +3,60 @@
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin(stdpath('data') . '/plugged')
 
+" CoC Vim Related
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'scrooloose/nerdtree'
-"Plug 'tsony-tsonev/nerdtree-git-plugin'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-devicons'
+
+" Common
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy find files
 Plug 'scrooloose/nerdcommenter'
-"Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-
-Plug 'christoomey/vim-tmux-navigator'
-
-Plug 'morhetz/gruvbox'
-
 Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
 
+" Neovim Related
 Plug 'neovim/nvim-lspconfig'
+
+" NerdTree Related
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
+
+" GoLang Related
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+" Theme Related
+Plug 'morhetz/gruvbox'
+
+" Unused Plugins
+Plug 'tsony-tsonev/nerdtree-git-plugin'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 " Initialize plugin system
 call plug#end()
 
-inoremap jk <ESC>
-nmap <C-n> :NERDTreeToggle<CR>
-vmap ++ <plug>NERDCommenterToggle
-nmap ++ <plug>NERDCommenterToggle
+set relativenumber
+set number
+
+set smarttab
+set cindent
+set tabstop=2
+set shiftwidth=2
+" always uses spaces instead of tab characters
+set expandtab
+
+" from readme
+" if hidden is not set, TextEdit might fail.
+set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+colorscheme gruvbox
 
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
@@ -41,19 +69,49 @@ let g:NERDTreeGitStatusWithFlags = 1
 "let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 "let g:NERDTreeGitStatusNodeColorization = 1
 "let g:NERDTreeColorMapCustom = {
-"\ "Staged"    : "#0ee375",  
-"\ "Modified"  : "#d9bf91",  
-"\ "Renamed"   : "#51C9FC",  
-"\ "Untracked" : "#FCE77C",  
-"\ "Unmerged"  : "#FC51E6",  
-"\ "Dirty"     : "#FFBD61",  
-"\ "Clean"     : "#87939A",   
-"\ "Ignored"   : "#808080"   
-"\ }                         
+"\ "Staged"    : "#0ee375",
+"\ "Modified"  : "#d9bf91",
+"\ "Renamed"   : "#51C9FC",
+"\ "Untracked" : "#FCE77C",
+"\ "Unmerged"  : "#FC51E6",
+"\ "Dirty"     : "#FFBD61",
+"\ "Clean"     : "#87939A",
+"\ "Ignored"   : "#808080"
+"\ }
 
 
 let g:NERDTreeIgnore = ['^node_modules$']
 let NERDTreeShowHidden=1
+
+inoremap jk <ESC>
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+nmap ++ <plug>NERDCommenterToggle
+vmap ++ <plug>NERDCommenterToggle
+
+" j/k will move virtual lines (lines that wrap)
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
+
+" Open current dir
+autocmd BufEnter * lcd %:p:h
+
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" coc config
+let g:coc_global_extensions = [
+      \ 'coc-snippets',
+      \ 'coc-pairs',
+      \ 'coc-tsserver',
+      \ 'coc-eslint',
+      \ 'coc-prettier',
+      \ 'coc-json',
+      \ ]
 
 " vim-prettier
 "let g:prettier#quickfix_enabled = 0
@@ -64,75 +122,20 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 "let g:prettier#autoformat = 0
 "autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
-
 " ctrlp
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
-" j/k will move virtual lines (lines that wrap)
-noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
-noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
-
-" set relativenumber
-set number
-
-set smarttab
-set cindent
-set tabstop=2
-set shiftwidth=2
-" always uses spaces instead of tab characters
-set expandtab
-
-colorscheme gruvbox
-
-" sync open file with NERDTree
-" " Check if NERDTree is open or active
-function! IsNERDTreeOpen()        
-return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and we're not in vimdiff
-function! SyncTree()
-if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-NERDTreeFind
-wincmd p
-endif
-endfunction
-
-" Highlight currently open buffer in NERDTree
-autocmd BufEnter * call SyncTree()
-
-" coc config
-let g:coc_global_extensions = [
-			\ 'coc-snippets',
-			\ 'coc-pairs',
-			\ 'coc-tsserver',
-			\ 'coc-eslint', 
-			\ 'coc-prettier', 
-			\ 'coc-json', 
-			\ ]
-" from readme
-" if hidden is not set, TextEdit might fail.
-set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
-
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-			\ pumvisible() ? "\<C-n>" :
-			\ <SID>check_back_space() ? "\<TAB>" :
-			\ coc#refresh()
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-let col = col('.') - 1
-return !col || getline('.')[col - 1]  =~# '\s'
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 " Use <c-space> to trigger completion.
@@ -158,11 +161,11 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-if (index(['vim','help'], &filetype) >= 0)
-execute 'h '.expand('<cword>')
-else
-call CocAction('doHover')
-endif
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
 endfunction
 
 " Highlight symbol under cursor on CursorHold
@@ -213,17 +216,6 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Load golps
-lua << EOF
--- require'lspconfig'.gopls.setup{}
-EOF
-
-" Golps auto-format and missing import
-" autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
-
-" To make your Ctrl+x,Ctrl+o work with Omnifunc
-" autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " Using CocList
 " Show all diagnostics
