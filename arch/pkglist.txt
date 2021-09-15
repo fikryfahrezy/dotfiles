@@ -271,6 +271,7 @@ wget
 which
 wpa_supplicant
 wps-office
+xclip
 xcursor-simpleandsoft
 xcursor-vanilla-dmz-aa
 xdg-user-dirs
