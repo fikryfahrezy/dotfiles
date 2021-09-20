@@ -1,4 +1,5 @@
 android-studio
+audio-recorder
 brave-bin
 datagrip
 datagrip-jre

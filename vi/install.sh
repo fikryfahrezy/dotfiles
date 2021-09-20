@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Running nvim/install.sh"
+echo "Running n-vim/install.sh"
 
 FWD=`dirname "$0"`
 CWD="$(pwd)/$FWD/"
@@ -14,8 +14,7 @@ $FWD/nvim.appimage --appimage-extract
 sudo mv squashfs-root /
 sudo ln -s /squashfs-root/AppRun /usr/bin/nvim
 
-$CWD/ldf.sh -s $CWD/init.vim $HOME/.config/nvim/init.vim
-$CWD/ldf.sh -s $CWD/main.vim $HOME/.config/nvim/main.vim
+$CWD/ldf.sh $CWD/nvim.vim $HOME/.config/nvim/init.vim s
 
 rm -rf $FWD/nvim.appimage
 rm -rf $FWD/squashfs-root
@@ -27,12 +26,14 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 # link COC setting
-$CWD/ldf.sh -s $CWD/coc-settings.json $HOME/.config/nvim/coc-settings.json
+$CWD/ldf.sh $CWD/nvim-coc.json $HOME/.config/nvim/coc-settings.json s
 
 # Install SpaceVim
 curl -sLf https://spacevim.org/install.sh | bash
 
-$CWD/ldf.sh -s $CWD/init.toml $HOME/.SpaceVim.d/init.toml
-$CWD/ldf.sh -s $CWD/myspacevim.vim $HOME/.SpaceVim.d/autoload/myspacevim.vim
+# Link SpaceVim Config
+$CWD/ldf.sh $CWD/spacevim.toml $HOME/.SpaceVim.d/init.toml s
+$CWD/ldf.sh $CWD/myspacevim.vim $HOME/.SpaceVim.d/autoload/myspacevim.vim s
+$CWD/ldf.sh $CWD/spacevim-coc.json $HOME/.SpaceVim/coc-settings.json s
 
-echo "Done running nvim/install.sh"
+echo "Done running n-vim/install.sh"
