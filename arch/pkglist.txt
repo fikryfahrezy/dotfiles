@@ -77,7 +77,6 @@ glibc
 gnome-icon-theme
 gnome-keyring
 gnome-themes-extra
-google-chrome
 gparted
 grep
 grub
@@ -101,6 +100,8 @@ hexchat
 htop
 inetutils
 intel-ucode
+intellij-idea-ultimate-edition
+intellij-idea-ultimate-edition-jre
 inxi
 iproute2
 iptables
@@ -217,6 +218,9 @@ pulseaudio-ctl
 pulseaudio-zeroconf
 python-pynvim
 qpdfview
+qt5-quickcontrols
+qt5-webengine
+qt5-webkit
 reiserfsprogs
 ripgrep
 rsync
@@ -236,6 +240,8 @@ systemd-fsck-silent
 systemd-sysvcompat
 tar
 tealdeer
+teamviewer
+telegram-desktop
 terminus-font
 texinfo
 thunar

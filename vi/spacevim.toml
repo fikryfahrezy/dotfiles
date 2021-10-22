@@ -32,6 +32,8 @@
   name = 'autocomplete'
   auto_completion_return_key_behavior = "complete"
   auto_completion_tab_key_behavior = "smart"
+  auto_completion_complete_with_key_sequence = "kj"
+  auto_completion_complete_with_key_sequence_delay = 0.1
 
 [[layers]]
   name = 'shell'
@@ -44,7 +46,6 @@
 [[layers]]
   name = "lsp"
   filetypes = [
-    "html",
     "javascript",
     "typescript"
   ]

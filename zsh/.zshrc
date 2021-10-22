@@ -106,3 +106,4 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 eval "$(fasd --init auto)"
+eval "$(starship init zsh)"

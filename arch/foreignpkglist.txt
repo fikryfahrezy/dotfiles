@@ -4,11 +4,13 @@ brave-bin
 datagrip
 datagrip-jre
 droidcam
-google-chrome
+intellij-idea-ultimate-edition
+intellij-idea-ultimate-edition-jre
 mongodb-bin
 mongodb-tools-bin
 postman-bin
 scrcpy
+teamviewer
 ttf-wps-fonts
 v4l2loopback-dc-dkms
 visual-studio-code-bin

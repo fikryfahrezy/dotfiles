@@ -26,7 +26,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 # link COC setting
-$CWD/ldf.sh $CWD/nvim-coc.json $HOME/.config/nvim/coc-settings.json s
+$CWD/ldf.sh $CWD/coc-settings.json $HOME/.config/nvim/coc-settings.json s
 
 # Install SpaceVim
 curl -sLf https://spacevim.org/install.sh | bash
@@ -34,6 +34,7 @@ curl -sLf https://spacevim.org/install.sh | bash
 # Link SpaceVim Config
 $CWD/ldf.sh $CWD/spacevim.toml $HOME/.SpaceVim.d/init.toml s
 $CWD/ldf.sh $CWD/myspacevim.vim $HOME/.SpaceVim.d/autoload/myspacevim.vim s
-$CWD/ldf.sh $CWD/spacevim-coc.json $HOME/.SpaceVim/coc-settings.json s
+$CWD/ldf.sh $CWD/coc-settings.json $HOME/.SpaceVim/coc-settings.json s
+$CWD/ldf.sh $CWD/coc.vim $HOME/.SpaceVim.d/plugin/coc.vim s
 
 echo "Done running n-vim/install.sh"
