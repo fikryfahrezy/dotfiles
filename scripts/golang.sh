@@ -4,7 +4,7 @@ echo "Running scripts/golang.sh"
 
 FWD=`dirname "$0"`
 CWD="$(pwd)/$FWD/"
-GO_VER="1.17"
+GO_VER="1.17.6"
 GO_PATH=/usr/local/go
 PREV_VER=""
 
