@@ -11,7 +11,6 @@ sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
 sudo chmod g+rwx "$HOME/.docker" -R
 
 sudo mkdir -p "$HOME/Docker/mongo/data/db"
-sudo mkdir -p "$HOME/Docker/mysql/conf.d"
 sudo mkdir -p "$HOME/Docker/mysql/mysql"
 sudo mkdir -p "$HOME/Docker/postgresql/data"
 
@@ -36,7 +35,7 @@ docker pull mysql:$MYSQL_VER
 docker pull phpmyadmin/phpmyadmin:$PHPMYADMIN_VER
 docker pull postgres:$POSTGRE_VER
 
-docker run --name some-mysql -v "$HOME/Docker/mysql/mysql":/var/lib/mysql -v "$HOME/Docker/mysql/conf.d":/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=root --network="mysql_net" -p 3306:3306 --restart=unless-stopped -d mysql:$MYSQL_VER --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+docker run --name some-mysql -v "$HOME/Docker/mysql/mysql":/var/lib/mysql -v -e MYSQL_ROOT_PASSWORD=root --network="mysql_net" -p 3306:3306 --restart=unless-stopped -d mysql:$MYSQL_VER --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 docker run --name some-postgre -e PGDATA=/var/lib/postgresql/data/pgdata -v "$HOME/Docker/postgresql/data":/var/lib/postgresql/data -e POSTGRES_PASSWORD=postgres --network="postgre_net" -p 5432:5432 --restart=unless-stopped -d postgres:$POSTGRE_VER
 docker run --name some-mongo -v "$HOME/Docker/mongo/data/db":/data/db -e MONGO_INITDB_ROOT_USERNAME=mongo -e MONGO_INITDB_ROOT_PASSWORD=mongo --network="mongo_net" -p 27017:27017 --restart=unless-stopped -d mongo:$MONGO_VER
 docker run --name phpmyadmin --link some-mysql:db --network="mysql_net" -p 3307:80 -d phpmyadmin/phpmyadmin:$PHPMYADMIN_VER
