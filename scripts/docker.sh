@@ -37,7 +37,7 @@ docker pull phpmyadmin/phpmyadmin:$PHPMYADMIN_VER
 docker pull postgres:$POSTGRE_VER
 docker pull redis:$REDIS_VER
 
-docker run --name some-mysql -v "$HOME/Docker/mysql/mysql":/var/lib/mysql -v -e MYSQL_ROOT_PASSWORD=root --network="mysql_net" -p 3306:3306 --restart=unless-stopped -d mysql:$MYSQL_VER --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+docker run --name some-mysql -v "$HOME/Docker/mysql/mysql":/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root --network="mysql_net" -p 3306:3306 --restart=unless-stopped -d mysql:$MYSQL_VER --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 docker run --name phpmyadmin --link some-mysql:db --network="mysql_net" -p 3307:80 -d phpmyadmin/phpmyadmin:$PHPMYADMIN_VER
 
 docker run --name some-postgre -e PGDATA=/var/lib/postgresql/data/pgdata -v "$HOME/Docker/postgresql/data":/var/lib/postgresql/data -e POSTGRES_PASSWORD=postgres --network="postgre_net" -p 5432:5432 --restart=unless-stopped -d postgres:$POSTGRE_VER
